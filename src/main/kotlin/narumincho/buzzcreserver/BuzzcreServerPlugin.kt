@@ -14,6 +14,7 @@ class BuzzcreServerPlugin : JavaPlugin() {
                 NaruminchoC { message: String -> logger.info(message) }
         )
         logger.info("naruminchoCCommand.setExecutorできたっぽい");
+        server.pluginManager.registerEvents(MyListener(), this)
     }
 
     override fun onDisable() {
