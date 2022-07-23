@@ -1,0 +1,10 @@
+name: BuzzcreServer
+version: '${project.version}'
+main: narumincho.buzzcreserver.BuzzcreServerPlugin
+api-version: 1.19
+authors: [ narumincho ]
+commands:
+  naruminchoc:
+    description: "実験用コマンド naruminchoc"
+    usage: /<command>
+    default: op
