@@ -4,34 +4,22 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class BuzzcreServerPlugin : JavaPlugin() {
     override fun onEnable() {
-        logger.info("有効化できたっぽいぞ")
-        val naruminchoCCommand = getCommand("naruminchoc");
-        if (naruminchoCCommand == null) {
-            logger.info("naruminchoc コマンドを取得できなかった");
-            return;
+        logger.info("BuzzcreServerPlugin 初期化中....")
+        val menuCommand = getCommand("m");
+        if (menuCommand == null) {
+            logger.info("m コマンドを取得できなかった");
+            return
         }
-        val context = Context(
-                log = { message -> logger.info(message) },
-                executeCommand = { commandName, argument ->
-                    run {
-                        val command = server.commandMap.getCommand(commandName)
-                        if(command == null) {
-                            logger.warning(commandName+"というコマンドは見つからなかった...")
-                            return@run
-                        }
-                        command.execute(
-                                server.consoleSender,
-                                commandName,
-                                argument
-                        )
-                    }
+        for(world in server.worlds) {
+            logger.info("ワールド情報...")
+            logger.info(world.name)
+            logger.info(world.environment.name)
+            logger.info(world.spawnLocation.toString())
+        }
 
-                }
-        )
-
-        naruminchoCCommand.setExecutor(NaruminchoC(context))
-        logger.info("naruminchoCCommand.setExecutorできたっぽい");
-        server.pluginManager.registerEvents(MyListener(context), this)
+        menuCommand.setExecutor(MenuCommandHandler())
+        server.pluginManager.registerEvents(EventListener(), this)
+        logger.info("BuzzcreServerPlugin 初期化完了!");
     }
 
     override fun onDisable() {

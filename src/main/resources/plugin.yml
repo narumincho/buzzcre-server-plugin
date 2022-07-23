@@ -4,7 +4,7 @@ main: narumincho.buzzcreserver.BuzzcreServerPlugin
 api-version: 1.19
 authors: [ narumincho ]
 commands:
-  naruminchoc:
-    description: "実験用コマンド naruminchoc"
+  m:
+    description: "メニューを開く (開発中...)"
     usage: /<command>
-    default: op
+    default: true
