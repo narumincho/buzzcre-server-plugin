@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/stone",
+  "textures": {
+    "layer0": "minecraft:item/stone"
+  },
+  "overrides": [
+    { "predicate": {"custom_model_data": 1}, "model": "minecraft:item/menu_bluemap" }
+  ]
+}

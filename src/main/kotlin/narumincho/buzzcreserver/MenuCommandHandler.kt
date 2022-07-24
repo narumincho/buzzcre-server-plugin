@@ -19,10 +19,11 @@ class MenuCommandHandler : CommandExecutor {
             val gui = Bukkit.createInventory(sender, 9, menuTitle)
 
             val sampleItem = ItemStack(Material.STONE)
-            sampleItem.editMeta { consumer ->
+            sampleItem.editMeta { itemMeta ->
                 run {
-                    consumer.displayName(testMenuItemName)
-                    consumer.lore(
+                    itemMeta.displayName(testMenuItemName)
+                    itemMeta.setCustomModelData(0)
+                    itemMeta.lore(
                         listOf(
                             Component.text(sender.name + "さんのメニュー"),
                         )
@@ -33,7 +34,9 @@ class MenuCommandHandler : CommandExecutor {
             gui.setItem(0, sampleItem)
 
             sender.openInventory(gui)
+            return true
         }
+        Bukkit.getLogger().info("プレイヤー以外が /m コマンドを実行した")
         return true
     }
 }

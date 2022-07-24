@@ -1,5 +1,6 @@
 package narumincho.buzzcreserver
 
+import de.bluecolored.bluemap.api.BlueMapAPI
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.format.Style
@@ -44,8 +45,16 @@ class EventListener() : Listener {
         if (event.view.title() == menuTitle) {
             event.isCancelled = true
             if (event.currentItem?.displayName() == testMenuItemName) {
+                Bukkit.getLogger().info("メニューの項目をクリック!")
                 event.whoClicked.sendMessage("メニューの項目をクリックしたようだね")
                 event.whoClicked.closeInventory()
+                BlueMapAPI.getInstance().ifPresent { bluemapApi ->
+                    run {
+                        for (marker in bluemapApi.markerAPI.markerSets) {
+                            event.whoClicked.sendMessage(marker.label)
+                        }
+                    }
+                }
             }
         }
     }

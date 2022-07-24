@@ -1,5 +1,6 @@
 package narumincho.buzzcreserver
 
+import de.bluecolored.bluemap.api.BlueMapAPI
 import org.bukkit.plugin.java.JavaPlugin
 
 class BuzzcreServerPlugin : JavaPlugin() {
@@ -15,10 +16,12 @@ class BuzzcreServerPlugin : JavaPlugin() {
             logger.info(world.name)
             logger.info(world.environment.name)
             logger.info(world.spawnLocation.toString())
+            logger.info(world.seed.toString())
         }
 
         menuCommand.setExecutor(MenuCommandHandler())
         server.pluginManager.registerEvents(EventListener(), this)
+
         logger.info("BuzzcreServerPlugin 初期化完了!")
     }
 
