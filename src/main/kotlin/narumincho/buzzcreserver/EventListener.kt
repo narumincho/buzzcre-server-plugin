@@ -43,7 +43,6 @@ class EventListener() : Listener {
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
         if (event.view.title() == menuTitle) {
-            event.isCancelled = true
             if (event.currentItem?.displayName() == testMenuItemName) {
                 Bukkit.getLogger().info("メニューの項目をクリック!")
                 event.whoClicked.sendMessage("メニューの項目をクリックしたようだね")
@@ -56,6 +55,7 @@ class EventListener() : Listener {
                     }
                 }
             }
+            event.isCancelled = true
         }
     }
 }
