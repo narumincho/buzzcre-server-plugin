@@ -26,5 +26,6 @@ class BuzzcreServerPlugin : JavaPlugin() {
     }
 
     override fun onDisable() {
+        logger.info("BuzzcreServerPlugin onDisable が呼ばれた!")
     }
 }
