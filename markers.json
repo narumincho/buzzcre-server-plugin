@@ -2,7 +2,7 @@
   "markerSets": [
     {
       "id": "markers",
-      "label": "Markers",
+      "label": "マーカー",
       "toggleable": true,
       "defaultHide": false,
       "marker": [
@@ -198,6 +198,82 @@
           },
           "minDistance": 0.0,
           "maxDistance": 100000.0
+        },
+        {
+          "id": "cdjtte-house",
+          "type": "poi",
+          "map": "world",
+          "position": {
+            "x": -21,
+            "y": 70,
+            "z": 92
+          },
+          "minDistance": 0.0,
+          "maxDistance": 100000.0,
+          "label": "cdjtte の 家",
+          "newTab": true,
+          "icon": "assets/poi.svg",
+          "anchor": {
+            "x": 25,
+            "y": 45
+          }
+        },
+        {
+          "id": "Tyrannosaoris-house",
+          "type": "poi",
+          "map": "world",
+          "position": {
+            "x": 1395,
+            "y": 64.0,
+            "z": -1539
+          },
+          "minDistance": 0.0,
+          "maxDistance": 100000.0,
+          "label": "Tyrannosaoris の 村人ハウス",
+          "newTab": true,
+          "icon": "assets/poi.svg",
+          "anchor": {
+            "x": 25,
+            "y": 45
+          }
+        },
+        {
+          "id": "gake",
+          "type": "poi",
+          "map": "world",
+          "position": {
+            "x": 1152,
+            "y": 178.0,
+            "z": -518
+          },
+          "minDistance": 0.0,
+          "maxDistance": 100000.0,
+          "label": "ものすごい大きな崖 (バージョンの境目ではないよ)",
+          "newTab": true,
+          "icon": "assets/poi.svg",
+          "anchor": {
+            "x": 25,
+            "y": 45
+          }
+        },
+        {
+          "id": "murabito-building",
+          "type": "poi",
+          "map": "world",
+          "position": {
+            "x": 96,
+            "y": 68,
+            "z": 247
+          },
+          "minDistance": 0.0,
+          "maxDistance": 100000.0,
+          "label": "大きな村人格納所",
+          "newTab": true,
+          "icon": "assets/poi.svg",
+          "anchor": {
+            "x": 25,
+            "y": 45
+          }
         }
       ]
     }

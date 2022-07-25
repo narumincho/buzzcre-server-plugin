@@ -6,11 +6,13 @@ import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.inventory.ItemStack
 import java.net.URL
 import java.util.Timer
 import java.util.logging.Logger
@@ -42,7 +44,7 @@ class EventListener(private val logger: Logger) : Listener {
 
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
-        menuTitle;
+
         if (equalComponentAsPlanText(event.view.title(), menuTitle)) {
             val currentItemName = event.currentItem?.displayName()
             if (currentItemName == null) {
@@ -65,6 +67,15 @@ class EventListener(private val logger: Logger) : Listener {
                         }
                     }
                 }
+            }
+            if(false) {
+                // これでコスト計算できそう.
+                for(item in event.whoClicked.inventory) {
+                    if(item.type === Material.EMERALD) {
+
+                    }
+                }
+                event.whoClicked.inventory.removeItem(ItemStack(Material.EMERALD, 1))
             }
         }
     }

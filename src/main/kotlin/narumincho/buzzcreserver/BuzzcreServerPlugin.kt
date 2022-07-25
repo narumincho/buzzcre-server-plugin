@@ -63,7 +63,7 @@ class BuzzcreServerPlugin : JavaPlugin() {
 
         val markerId = world.name + "WorldBorderGenerated"
         val marker = markerSet.createLineMarker(
-            markerId + "Marker",
+            markerId,
             bluemapWorld,
             Vector3d(worldBorderSize, 100.0, worldBorderSize),
             Line(
