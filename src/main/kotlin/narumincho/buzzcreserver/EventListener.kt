@@ -20,7 +20,7 @@ class EventListener() : Listener {
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
         Timer("SettingUp", false).schedule(5000) {
-            event.player.sendMessage("バズクリサーバーへようこそ! 自由に過ごしてね! ポータルで転送されないバグは直ったぞ! /m でメニューが開けるように開発中!")
+            event.player.sendMessage("バズクリサーバーへようこそ! 自由に過ごしてね! /m でメニューが開けるように開発中!")
             event.player.sendMessage(
                 Component.text(
                     "3Dマップ (bluemap)",
@@ -42,10 +42,19 @@ class EventListener() : Listener {
 
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
-        if (event.view.title() == menuTitle) {
-            if (event.currentItem?.displayName() == testMenuItemName) {
-                Bukkit.getLogger().info("メニューの項目をクリック!")
-                event.whoClicked.sendMessage("メニューの項目をクリックしたようだね")
+        menuTitle;
+        if (equalComponentAsPlanText(event.view.title(), menuTitle)) {
+            Bukkit.getLogger().info(event.view.player.name + "さん. メニューの項目をクリックしたようだね")
+            val currentItemName = event.currentItem?.displayName()
+            if (currentItemName == null) {
+                event.whoClicked.sendMessage("currentItemName が null だった...")
+                event.isCancelled = true
+                return
+            }
+            if (equalComponentAsPlanText(currentItemName, testMenuItemName)) {
+                event.whoClicked.sendMessage("ok")
+                event.isCancelled = true
+                event.whoClicked.sendMessage("マーカー 一覧")
                 event.whoClicked.closeInventory()
                 BlueMapAPI.getInstance().ifPresent { bluemapApi ->
                     run {
@@ -55,7 +64,6 @@ class EventListener() : Listener {
                     }
                 }
             }
-            event.isCancelled = true
         }
     }
 }

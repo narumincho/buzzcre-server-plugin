@@ -1,6 +1,8 @@
 package narumincho.buzzcreserver
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.command.Command
@@ -9,23 +11,24 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
-val menuTitle = Component.text("メニュー")
+const val menuTitle = "メニュー"
 
-val testMenuItemName = Component.text("メニューの項目テスト")
+const val testMenuItemName = "bluemap の マーカー"
 
 class MenuCommandHandler : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender is Player) {
-            val gui = Bukkit.createInventory(sender, 9, menuTitle)
+            val gui = Bukkit.createInventory(sender, 9, Component.text(menuTitle))
 
             val sampleItem = ItemStack(Material.STONE)
             sampleItem.editMeta { itemMeta ->
                 run {
-                    itemMeta.displayName(testMenuItemName)
-                    itemMeta.setCustomModelData(0)
+                    itemMeta.displayName(Component.text(testMenuItemName).decorate(TextDecoration.BOLD))
+                    itemMeta.setCustomModelData(1)
                     itemMeta.lore(
                         listOf(
-                            Component.text(sender.name + "さんのメニュー"),
+                            Component.text("bluemap に 設定したマーカーを取得する").color(TextColor.color(200, 200, 200)),
+                            Component.text("(エメラルドをコストにして設定できるようにしようかな)"),
                         )
                     )
                 }
