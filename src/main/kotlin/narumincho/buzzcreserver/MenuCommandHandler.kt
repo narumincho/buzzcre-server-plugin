@@ -10,14 +10,16 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import java.util.logging.Logger
 
 const val menuTitle = "メニュー"
 
 const val testMenuItemName = "bluemap の マーカー"
 
-class MenuCommandHandler : CommandExecutor {
+class MenuCommandHandler(private val logger: Logger) : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender is Player) {
+            logger.info(sender.name + "がメニューを開いた!")
             val gui = Bukkit.createInventory(sender, 9, Component.text(menuTitle))
 
             val sampleItem = ItemStack(Material.STONE)
@@ -39,7 +41,7 @@ class MenuCommandHandler : CommandExecutor {
             sender.openInventory(gui)
             return true
         }
-        Bukkit.getLogger().info("プレイヤー以外が /m コマンドを実行した")
+        logger.info("プレイヤー以外が /m コマンドを実行した")
         return true
     }
 }

@@ -1,7 +1,6 @@
 package narumincho.buzzcreserver
 
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.ComponentIteratorType
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.Bukkit
 import java.util.*
@@ -19,8 +18,10 @@ fun <T> optionalToNullable(optional: Optional<T>): T? {
     return optional.orElse(null)
 }
 
-fun equalComponentAsPlanText(a: Component, text: String): Boolean {
+fun equalComponentAsPlanText(a: Component, text: String, log: Boolean = false): Boolean {
     val aText = PlainTextComponentSerializer.plainText().serialize(a)
-    Bukkit.getLogger().info("$aText と $text を比較 ${aText.contains(text)} だった")
+    if (log) {
+        Bukkit.getLogger().info("$aText と $text を比較 ${aText.contains(text)} だった")
+    }
     return aText.contains(text)
 }

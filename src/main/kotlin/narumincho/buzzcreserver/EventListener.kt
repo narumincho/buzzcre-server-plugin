@@ -12,11 +12,12 @@ import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import java.net.URL
-import java.util.*
+import java.util.Timer
+import java.util.logging.Logger
 import kotlin.concurrent.schedule
 
 
-class EventListener() : Listener {
+class EventListener(private val logger: Logger) : Listener {
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
         Timer("SettingUp", false).schedule(5000) {
@@ -37,29 +38,30 @@ class EventListener() : Listener {
                 )
             }
         }
-        Bukkit.getLogger().info("参加を検知した " + event.player.name)
     }
 
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
         menuTitle;
         if (equalComponentAsPlanText(event.view.title(), menuTitle)) {
-            Bukkit.getLogger().info(event.view.player.name + "さん. メニューの項目をクリックしたようだね")
             val currentItemName = event.currentItem?.displayName()
             if (currentItemName == null) {
-                event.whoClicked.sendMessage("currentItemName が null だった...")
                 event.isCancelled = true
+                event.whoClicked.sendMessage("currentItemName が null だった...")
                 return
             }
             if (equalComponentAsPlanText(currentItemName, testMenuItemName)) {
-                event.whoClicked.sendMessage("ok")
                 event.isCancelled = true
-                event.whoClicked.sendMessage("マーカー 一覧")
+                event.whoClicked.sendMessage("マーカー 一覧を出力....")
                 event.whoClicked.closeInventory()
                 BlueMapAPI.getInstance().ifPresent { bluemapApi ->
                     run {
-                        for (marker in bluemapApi.markerAPI.markerSets) {
-                            event.whoClicked.sendMessage(marker.label)
+                        for (markerSet in bluemapApi.markerAPI.markerSets) {
+                            logger.info("markerSet.id=" + markerSet.id)
+                            event.whoClicked.sendMessage(markerSet.id + "," + markerSet.label)
+                            for (marker in markerSet.markers) {
+                                event.whoClicked.sendMessage("- " + marker.label)
+                            }
                         }
                     }
                 }
