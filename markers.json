@@ -238,6 +238,25 @@
           }
         },
         {
+          "id": "golem-trap-2",
+          "type": "poi",
+          "map": "world",
+          "position": {
+            "x": 1762,
+            "y": 64,
+            "z": -1497
+          },
+          "minDistance": 0.0,
+          "maxDistance": 100000.0,
+          "label": "ゴーレムトラップ2台目",
+          "newTab": true,
+          "icon": "assets/poi.svg",
+          "anchor": {
+            "x": 25,
+            "y": 45
+          }
+        },
+        {
           "id": "gake",
           "type": "poi",
           "map": "world",
