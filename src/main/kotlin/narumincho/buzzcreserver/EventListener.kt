@@ -1,20 +1,18 @@
 package narumincho.buzzcreserver
 
-import de.bluecolored.bluemap.api.BlueMapAPI
+import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.inventory.ItemStack
+import org.bukkit.event.player.PlayerLoginEvent
 import java.net.URL
-import java.util.Timer
+import java.util.*
 import java.util.logging.Logger
 import kotlin.concurrent.schedule
 
@@ -23,15 +21,19 @@ class EventListener(private val logger: Logger) : Listener {
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
         Timer("SettingUp", false).schedule(5000) {
-            event.player.sendMessage("バズクリサーバーへようこそ! 自由に過ごしてね! /m でメニューが開けるように開発中!")
+            event.player.sendMessage("バズクリサーバーへようこそ! 自由に過ごしてね!")
             event.player.sendMessage(
                 Component.text(
                     "3Dマップ (bluemap)",
                     Style.style().decorate(TextDecoration.UNDERLINED).clickEvent(
-                        ClickEvent.openUrl(URL("http://160.251.53.112:8100/"))
+                        ClickEvent.openUrl(URL("http://mc.narumincho.com:8100/"))
                     ).build()
                 )
             )
+            event.player.sendMessage("お知らせ")
+            event.player.sendMessage("・ /m でメニューはやめました")
+            event.player.sendMessage("・ BlueMap でマーカーを付けたい場所と名前があればチャットで発言してね")
+            event.player.sendMessage("・ その他 なにかあればチャットで発言してね. あとで見てます")
             for (player in Bukkit.getOnlinePlayers()) {
                 event.player.world.playSound(
                     event.player.location, Sound.ENTITY_PLAYER_LEVELUP,
@@ -43,40 +45,7 @@ class EventListener(private val logger: Logger) : Listener {
     }
 
     @EventHandler
-    fun onInventoryClick(event: InventoryClickEvent) {
-
-        if (equalComponentAsPlanText(event.view.title(), menuTitle)) {
-            val currentItemName = event.currentItem?.displayName()
-            if (currentItemName == null) {
-                event.isCancelled = true
-                event.whoClicked.sendMessage("currentItemName が null だった...")
-                return
-            }
-            if (equalComponentAsPlanText(currentItemName, testMenuItemName)) {
-                event.isCancelled = true
-                event.whoClicked.sendMessage("マーカー 一覧を出力....")
-                event.whoClicked.closeInventory()
-                BlueMapAPI.getInstance().ifPresent { bluemapApi ->
-                    run {
-                        for (markerSet in bluemapApi.markerAPI.markerSets) {
-                            logger.info("markerSet.id=" + markerSet.id)
-                            event.whoClicked.sendMessage(markerSet.id + "," + markerSet.label)
-                            for (marker in markerSet.markers) {
-                                event.whoClicked.sendMessage("- " + marker.label)
-                            }
-                        }
-                    }
-                }
-            }
-            if(false) {
-                // これでコスト計算できそう.
-                for(item in event.whoClicked.inventory) {
-                    if(item.type === Material.EMERALD) {
-
-                    }
-                }
-                event.whoClicked.inventory.removeItem(ItemStack(Material.EMERALD, 1))
-            }
-        }
+    fun onAsyncChatEvent(asyncChatEvent: AsyncChatEvent) {
+        logger.info("${asyncChatEvent.player.name}がチャットで発言した. 場所 ${asyncChatEvent.player.location.world} ${asyncChatEvent.player.location.x} ${asyncChatEvent.player.location.y} ${asyncChatEvent.player.location.z}")
     }
 }

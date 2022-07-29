@@ -3,8 +3,3 @@ version: '${project.version}'
 main: narumincho.buzzcreserver.BuzzcreServerPlugin
 api-version: 1.19
 authors: [ narumincho ]
-commands:
-  m:
-    description: "メニューを開く (開発中...)"
-    usage: /<command>
-    default: true

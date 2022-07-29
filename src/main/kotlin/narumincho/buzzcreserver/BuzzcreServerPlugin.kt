@@ -10,11 +10,6 @@ import java.awt.Color
 class BuzzcreServerPlugin : JavaPlugin() {
     override fun onEnable() {
         logger.info("BuzzcreServerPlugin 初期化中....")
-        val menuCommand = getCommand("m")
-        if (menuCommand == null) {
-            logger.info("m コマンドを取得できなかった")
-            return
-        }
         for (world in server.worlds) {
             logger.info("ワールド情報...")
             logger.info(world.name)
@@ -23,8 +18,6 @@ class BuzzcreServerPlugin : JavaPlugin() {
             logger.info(world.seed.toString())
             setWorldBorder(world)
         }
-
-        menuCommand.setExecutor(MenuCommandHandler(logger))
         server.pluginManager.registerEvents(EventListener(logger), this)
 
         logger.info("BuzzcreServerPlugin 初期化完了!")
@@ -78,7 +71,6 @@ class BuzzcreServerPlugin : JavaPlugin() {
         marker.detail = "これより外側には行けない"
         marker.label = "ワールドボーダー"
 
-        bluemapApi.markerAPI.save()
         logger.info("Bluemap のワールドボーダーを設定した $marker")
     }
 }
