@@ -293,6 +293,25 @@
             "x": 25,
             "y": 45
           }
+        },
+        {
+          "id": "woodland-mansion",
+          "type": "poi",
+          "map": "world",
+          "position": {
+            "x": 523,
+            "y": 68,
+            "z": 2083
+          },
+          "minDistance": 0.0,
+          "maxDistance": 100000.0,
+          "label": "つよポンが発見した森の洋館",
+          "newTab": true,
+          "icon": "assets/poi.svg",
+          "anchor": {
+            "x": 25,
+            "y": 45
+          }
         }
       ]
     }
