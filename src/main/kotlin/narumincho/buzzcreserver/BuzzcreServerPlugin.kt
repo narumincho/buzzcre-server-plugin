@@ -1,11 +1,7 @@
 package narumincho.buzzcreserver
 
-import com.flowpowered.math.vector.Vector3d
-import de.bluecolored.bluemap.api.BlueMapAPI
-import de.bluecolored.bluemap.api.marker.Line
 import org.bukkit.World
 import org.bukkit.plugin.java.JavaPlugin
-import java.awt.Color
 
 class BuzzcreServerPlugin : JavaPlugin() {
     override fun onEnable() {
@@ -34,44 +30,6 @@ class BuzzcreServerPlugin : JavaPlugin() {
             return
         }
         world.worldBorder.setSize(worldBorderSize, 0)
-
-        BlueMapAPI.onEnable { bluemapApi ->
-            setWorldBorderInBluemap(world, worldBorderSize, bluemapApi)
-        }
-    }
-
-
-    private fun setWorldBorderInBluemap(world: World, worldBorderSize: Double, bluemapApi: BlueMapAPI) {
-        val bluemapWorld = optionalToNullable(bluemapApi.getMap(world.name))
-        if (bluemapWorld == null) {
-            logger.info("Bluemap のワールド名が思ったのと, フォルダ名が違かった folderName=" + world.name)
-        }
-        val markerSet =
-            optionalToNullable(bluemapApi.markerAPI.getMarkerSet("markers"))
-
-        if (markerSet == null) {
-            logger.info("markers というIDの MarkerSet がなかった...")
-            return
-        }
-
-        val markerId = world.name + "WorldBorderGenerated"
-        val marker = markerSet.createLineMarker(
-            markerId,
-            bluemapWorld,
-            Vector3d(worldBorderSize, 100.0, worldBorderSize),
-            Line(
-                Vector3d(-worldBorderSize / 2, 100.0, -worldBorderSize / 2),
-                Vector3d(worldBorderSize / 2, 100.0, -worldBorderSize / 2),
-                Vector3d(worldBorderSize / 2, 100.0, worldBorderSize / 2),
-                Vector3d(-worldBorderSize / 2, 100.0, worldBorderSize / 2),
-                Vector3d(-worldBorderSize / 2, 100.0, -worldBorderSize / 2)
-            )
-        )
-        marker.lineColor = Color.RED
-        marker.detail = "これより外側には行けない"
-        marker.label = "ワールドボーダー"
-
-        logger.info("Bluemap のワールドボーダーを設定した $marker")
     }
 }
 

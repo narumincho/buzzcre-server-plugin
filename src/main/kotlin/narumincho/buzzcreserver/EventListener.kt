@@ -10,7 +10,6 @@ import org.bukkit.Sound
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerLoginEvent
 import java.net.URL
 import java.util.*
 import java.util.logging.Logger
@@ -31,9 +30,18 @@ class EventListener(private val logger: Logger) : Listener {
                 )
             )
             event.player.sendMessage("お知らせ")
-            event.player.sendMessage("・ /m でメニューはやめました")
             event.player.sendMessage("・ BlueMap でマーカーを付けたい場所と名前があればチャットで発言してね")
             event.player.sendMessage("・ その他 なにかあればチャットで発言してね. あとで見てます")
+            event.player.sendMessage(
+                Component.text("・ このサーバーとは別に").append(
+                    Component.text(
+                        "「サバイバルサーバーで作った巨大迷宮」",
+                        Style.style().decorate(TextDecoration.UNDERLINED).clickEvent(
+                            ClickEvent.openUrl(URL("https://minecraft-mcworld.com/15136/"))
+                        ).build()
+                    )
+                ).append(Component.text("を公開しています!"))
+            )
             for (player in Bukkit.getOnlinePlayers()) {
                 event.player.world.playSound(
                     event.player.location, Sound.ENTITY_PLAYER_LEVELUP,

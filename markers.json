@@ -200,6 +200,55 @@
           "maxDistance": 100000.0
         },
         {
+          "id": "netherWorldBorder",
+          "type": "line",
+          "map": "world_nether",
+          "position": {
+            "x": -375,
+            "y": 64,
+            "z": -375
+          },
+          "label": "ワールドボーダー",
+          "detail": "これより先には行けない",
+          "line": [
+            {
+              "x": -375,
+              "y": 64,
+              "z": -375
+            },
+            {
+              "x": 375,
+              "y": 64,
+              "z": -375
+            },
+            {
+              "x": 375,
+              "y": 64,
+              "z": 375
+            },
+            {
+              "x": -375,
+              "y": 64,
+              "z": 375
+            },
+            {
+              "x": -375,
+              "y": 64,
+              "z": -375
+            }
+          ],
+          "depthTest": true,
+          "lineWidth": 5,
+          "lineColor": {
+            "r": 255,
+            "g": 64,
+            "b": 64,
+            "a": 1
+          },
+          "minDistance": 0.0,
+          "maxDistance": 100000.0
+        },
+        {
           "id": "cdjtte-house",
           "type": "poi",
           "map": "world",
