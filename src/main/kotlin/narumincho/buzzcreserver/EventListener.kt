@@ -20,7 +20,7 @@ class EventListener(private val logger: Logger) : Listener {
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
         Timer("SettingUp", false).schedule(5000) {
-            event.player.sendMessage("バズクリサーバーへようこそ! 自由に過ごしてね!")
+            event.player.sendMessage("バズクリサーバーへようこそ... 所持金が少ないのでこのサーバーを2022年9月25日くらいに閉じます. 移住先は もりのパーティー が良いと思うよ. 自由度高めで運営がかなり優秀")
             event.player.sendMessage(
                 Component.text(
                     "3Dマップ (bluemap)",
@@ -29,19 +29,15 @@ class EventListener(private val logger: Logger) : Listener {
                     ).build()
                 )
             )
-            event.player.sendMessage("お知らせ")
-            event.player.sendMessage("・ BlueMap でマーカーを付けたい場所と名前があればチャットで発言してね")
-            event.player.sendMessage("・ その他 なにかあればチャットで発言してね. あとで見てます")
             event.player.sendMessage(
-                Component.text("・ このサーバーとは別に").append(
-                    Component.text(
-                        "「サバイバルサーバーで作った巨大迷宮」",
-                        Style.style().decorate(TextDecoration.UNDERLINED).clickEvent(
-                            ClickEvent.openUrl(URL("https://minecraft-mcworld.com/15136/"))
-                        ).build()
-                    )
-                ).append(Component.text("を公開しています!"))
+                Component.text(
+                    "ワールド配布先",
+                    Style.style().decorate(TextDecoration.UNDERLINED).clickEvent(
+                        ClickEvent.openUrl(URL("https://narumincho.notion.site/120d8446be184d848032d1ba00a3d280"))
+                    ).build()
+                )
             )
+
             for (player in Bukkit.getOnlinePlayers()) {
                 event.player.world.playSound(
                     event.player.location, Sound.ENTITY_PLAYER_LEVELUP,
