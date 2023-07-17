@@ -106,6 +106,10 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>fabricmc</id>
+            <url>https://maven.fabricmc.net/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -130,6 +134,11 @@
             <groupId>com.github.BlueMap-Minecraft</groupId>
             <artifactId>BlueMapAPI</artifactId>
             <version>v1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.fabricmc.fabric-api</groupId>
+            <artifactId>fabricApi</artifactId>
+            <version>0.59.0</version>
         </dependency>
     </dependencies>
 </project>
